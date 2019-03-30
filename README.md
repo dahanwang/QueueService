@@ -22,7 +22,7 @@ go run main.go
 
 **测试方法**
 1. 点击Open与服务器连接
-1. 点击Test加入机器人(可点击多次)
+1. 点击Test加入机器人(随时可点击多次)
 1. 点击Login加入客户端
 
 **QueueService原理**
