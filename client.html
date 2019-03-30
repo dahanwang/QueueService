@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script>
+        window.addEventListener("load", function(evt) {
+            var output = document.getElementById("output");
+            var input = document.getElementById("input");
+            var ws;
+            var print = function(message) {
+                var d = document.createElement("div");
+                d.innerHTML = message;
+                output.appendChild(d);
+            };
+            document.getElementById("open").onclick = function(evt) {
+                if (ws) {
+                    return false;
+                }
+                ws = new WebSocket("ws://localhost:8001/ws");
+                ws.onopen = function(evt) {
+                    print("OPEN");
+                }
+                ws.onclose = function(evt) {
+                    print("CLOSE");
+                    ws = null;
+                }
+                ws.onmessage = function(evt) {
+                    var jsonData = JSON.parse(evt.data);
+                    //print("RESPONSE: " + jsonData.code+"----" + jsonData.data + "-----" + jsonData.param);
+                    var code = jsonData.code;
+                    var data = jsonData.data;
+                    var param = jsonData.param;
+                    if (code == 1001) {
+                        document.getElementById("totallen").innerHTML = data;
+                        document.getElementById("currentlen").innerHTML = param;
+                    }else if (code == 1002) {
+                        print("客户端 " +  jsonData.data + "可以登录");
+                        if (!ws) {
+                            return false;
+                        }
+                        ws.close();
+                    }else if (code == 1003) {
+                        document.getElementById("clientName").innerHTML = data
+                         print("LOGIN----->" +  data);
+                    }
+                }
+                ws.onerror = function(evt) {
+                    print("ERROR: " + evt.data);
+                }
+                return false;
+            };
+            document.getElementById("login").onclick = function(evt) {
+                if (!ws) {
+                    return false;
+                }
+
+                var loginJson = '{ "code": 2, "data": "" }';
+                ws.send(loginJson);
+                return false;
+            };
+            document.getElementById("close").onclick = function(evt) {
+                if (!ws) {
+                    return false;
+                }
+                ws.close();
+                return false;
+            };
+
+            document.getElementById("test").onclick = function(evt) {
+                if (!ws) {
+                    return false;
+                }
+
+                var testJson = '{ "code": 1, "data": "" }';
+                ws.send(testJson);
+
+                print("TEST");
+                return false;
+            };
+        });
+    </script>
+</head>
+<body>
+<table>
+    <tr><td valign="top" width="50%">
+        <p> 点击“Open”按钮连接服务器，默认localhost:8001。点击“Close”按钮关闭连接同时服务器也会关闭</p>
+        
+        <p>    点击“Test”增加10个机器人到服务器队列。点击“Login”加入当前客户端进入队列</p>
+        <p>tips:当队列中数据排完或者当前客户端排到时服务器关闭</p>
+        
+            <form>
+                <button id="open">Open</button>
+                <button id="close">Close</button>
+            <button id="login">Login</button>
+            <button id="test">Test</button>
+            </form>
+
+             队伍总长度:<label id="totallen"></label>
+        <p></p>
+        当前客户端:<label id="clientName"></label>
+        排在第<label id="currentlen"></label>位
+    </td>
+    
+
+
+    <td valign="top" width="50%">
+        <div><font color="red">-----------------command--------------</font></div>
+        <div id="output"></div>
+    </td></tr>
+</table>
+</body>
+</html>
