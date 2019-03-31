@@ -36,4 +36,12 @@ go run main.go
 
 ![image](https://github.com/dahanwang/QueueService/blob/master/20190330154343.png)
 
+**TODOLIST**
+1. 由于时间比较紧，这边的项目工作比较多。未进行压测。
+1. 有部分值得优化的地方
+1. 目前QueueService还属于单点，以下是根据SOA思想对架构的初步设计
+
+
+
+
 ## 仅用于FunPlus线下编程作业
