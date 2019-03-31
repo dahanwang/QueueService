@@ -44,6 +44,8 @@ go run main.go
 
 目前QueueService还属于单点，以下是根据SOA思想对架构的初步设计
 
+![image](https://github.com/dahanwang/QueueService/blob/master/15540223181.png)
+
 1. LoginServer(登录服务器)向zookeeper注册
 1. QueueServer(队列服务器)向zookeeper订阅
 1. 客户端请求QueueServer，QueueServer根据LoginServer综合健康指标(注册人数，在线人数，排队状态等)获取具体LoginServer
