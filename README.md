@@ -39,9 +39,16 @@ go run main.go
 **TODOLIST**
 1. 由于时间比较紧，这边的项目工作比较多。未进行压测。
 1. 有部分值得优化的地方
-1. 目前QueueService还属于单点，以下是根据SOA思想对架构的初步设计
 
+**QueueService架构设计**
 
+目前QueueService还属于单点，以下是根据SOA思想对架构的初步设计
+
+1. LoginServer(登录服务器)向zookeeper注册
+1. QueueServer(队列服务器)向zookeeper订阅
+1. 客户端请求QueueServer
+1. QueueServer根据LoginServer综合健康指标(注册人数，在线人数，排队状态等)获取具体LoginServer
+1. 将LoginServer状态实时通知给客户端
 
 
 ## 仅用于FunPlus线下编程作业
