@@ -36,9 +36,12 @@ go run main.go
 
 ![image](https://github.com/dahanwang/QueueService/blob/master/20190330154343.png)
 
+由于这边的项目工作比较多，业余时间完成的本次作业。还有些功能没有完善以及可以优化的地方
+
 **TODOLIST**
-1. 由于时间比较紧，这边的项目工作比较多。未进行压测。
-1. 有部分值得优化的地方
+1. 未进行登录认证
+1. 未进行压测
+1. 未实现多客户端连接
 
 **QueueService架构设计**
 
