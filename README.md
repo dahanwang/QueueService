@@ -46,9 +46,9 @@ go run main.go
 
 1. LoginServer(登录服务器)向zookeeper注册
 1. QueueServer(队列服务器)向zookeeper订阅
-1. 客户端请求QueueServer
-1. QueueServer根据LoginServer综合健康指标(注册人数，在线人数，排队状态等)获取具体LoginServer
-1. 将LoginServer状态实时通知给客户端
+1. 客户端请求QueueServer，QueueServer根据LoginServer综合健康指标(注册人数，在线人数，排队状态等)获取具体LoginServer
+1. QueueServer将LoginServer状态实时通知给客户端
+1. 达到登录条件后，客户端连接LoginServer登录
 
 
 ## 仅用于FunPlus线下编程作业
