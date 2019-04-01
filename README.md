@@ -36,13 +36,6 @@ go run main.go
 
 ![image](https://github.com/dahanwang/QueueService/blob/master/20190330154343.png)
 
-由于这边的项目工作比较多，业余时间完成的本次作业。还有些功能没有完善以及可以优化的地方
-
-#### *TODOLIST*
-1. 未进行登录认证
-1. 未进行压测
-1. 未实现多客户端连接
-
 **QueueService架构设计**
 
 目前QueueService还属于单点，以下是根据SOA思想对架构的初步设计
@@ -54,6 +47,13 @@ go run main.go
 1. 客户端请求QueueServer，QueueServer根据LoginServer综合健康指标(注册人数，在线人数，排队状态等)获取具体LoginServer
 1. QueueServer将LoginServer状态实时通知给客户端
 1. 达到登录条件后，客户端连接LoginServer登录
+
+由于这边的项目工作比较多，业余时间完成的本次作业。还有些功能没有完善以及可以优化的地方
+
+#### *TODOLIST*
+1. 未进行登录认证
+1. 未进行压测
+1. 未实现多客户端连接
 
 
 ## 仅用于FunPlus线下编程作业
