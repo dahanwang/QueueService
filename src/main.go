@@ -44,14 +44,13 @@ func initLog() {
 func init() {
 	initLog()
 	channelInfoFIFO.InfoMap = make(map[string]bool)
-
 }
 
-func ChannelInfoConsumer(queue *service.Queue) {
+func ChannelInfoConsumer(channelQueue *service.ChannelQueue) {
 	logProducer.Debug(fmt.Sprintf("consume start"))
 	for {
 		//get head elem
-		qNode := queue.Pull()
+		qNode := <- channelQueue.Channel
 		if qNode == nil {
 			//logConsumer.Warn("empty queue!")
 			time.Sleep(time.Second)
@@ -81,7 +80,7 @@ func main() {
 	server := service.NewServer("127.0.0.1",8001)
 	go server.Start()
 
-	go ChannelInfoConsumer(service.ChannelQueue)
+	go ChannelInfoConsumer(service.PoolChan)
 	for {
 		time.Sleep(time.Minute * 100)
 	}

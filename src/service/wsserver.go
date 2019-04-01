@@ -134,8 +134,8 @@ func wsHandler(resp http.ResponseWriter, req *http.Request) {
 	}
 	wsConn = &wsConnection{
 		wsSocket: wsSocket,
-		inChan: make(chan *wsMessage, 1000),
-		outChan: make(chan *wsMessage, 1000),
+		inChan: make(chan *wsMessage, 1),
+		outChan: make(chan *wsMessage, 1),
 		closeChan: make(chan byte),
 		isClosed: false,
 	}

@@ -10,11 +10,27 @@ import (
 	"time"
 )
 
+
+// channel
+var PoolChan *ChannelQueue
+type ChannelQueue struct {
+	Channel chan interface{}
+}
+
+/*创建集合 */
+var queueNodeMap map[string]int
+
 var Myuid string
 type ChannelInfo struct {
 	Id string
 	Name string
 	LoginTime int64
+}
+
+func init()  {
+	PoolChan = &ChannelQueue{
+		Channel: make(chan interface{}, 100),
+	}
 }
 
 /**
@@ -62,7 +78,7 @@ func login() {
 	if queueNodeMap == nil {
 		queueNodeMap = make(map[string]int)
 	}
-	queueNodeMap[Myuid] = ChannelQueue.Len()
+	queueNodeMap[Myuid] = len(PoolChan.Channel)
 
 	// 发送队伍状态
 	HandlerLen()
@@ -77,7 +93,7 @@ func login() {
 }
 
 func HandlerLen() {
-	totalLen := ChannelQueue.Len()
+	totalLen := len(PoolChan.Channel)
 
 	if queueNodeMap == nil {
 		queueNodeMap = make(map[string]int)
@@ -121,7 +137,8 @@ func pushQueue(uid string) {
 		LoginTime: time.Now().Unix(),
 	}
 
-	ChannelQueue.Push(queueNode)
+	PoolChan.Channel <- queueNode
+	//ChannelQueue.Push(queueNode)
 }
 
 func  GetRandomString() string {
