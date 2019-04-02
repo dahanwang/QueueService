@@ -6,6 +6,6 @@
 ## 运行效果
 ![image](https://github.com/dahanwang/QueueService/blob/queue1/20190401211402.png)
 
-第一版 [QueueService](https://github.com/dahanwang/QueueService) 切换aster分支
+第一版 [QueueService](https://github.com/dahanwang/QueueService) 切换master分支
 
 ## 仅用于FunPlus线下编程作业
