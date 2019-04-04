@@ -8,4 +8,3 @@
 
 第一版 [QueueService](https://github.com/dahanwang/QueueService) 切换master分支
 
-## 仅用于FunPlus线下编程作业
